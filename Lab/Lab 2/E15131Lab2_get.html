@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Order T-Shirt Online </title>
+        <style>
+            h1,h2{
+                margin: 15px 0;
+            }
+            input[type=text], textarea {
+                width: 100%;
+                resize: vertical;
+            }
+            input[type=submit] {
+                margin-left:10px;
+                resize: vertical;
+            }
+            .col-1 {
+                float: left;
+                width: 20%;
+                margin-top: 3px;
+            }
+            .col-2 {
+                float: left;
+                width: 50%;
+                margin-top: 3px;
+            }
+            .col-3 {
+                float: left;
+                width: 25%;
+                margin-top: 3px;
+            }
+            .col-4 {
+                float: left;
+                width: 55%;
+                margin-top: 3px;
+            }
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            @media screen and (max-width: 650px) {
+                .col-1, .col-2, .col-3, .col-4 {
+                width: 100%;
+                margin-top: 0;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>Buy T-shirts Online</h1>
+            <h2>Fill out the form below and click "Order Now" to order</h2>
+        </header>
+
+        <form>
+            <div class="row">
+                <div class="col-1">Search by order number:</div>
+                <div class="col-2">
+                    <div class="col-3" style="width: 55%;" ><input type="text" name="SearchByOrder"></div>
+                    <div class="col-4" style="width: 45%;"><input type="submit" value="Search"></div>
+                </div>
+            </div>
+        </form>
+
+        <form action="E15131Lab2_get_Details.php" method = "GET">
+            <div class="row">
+                <div class="col-1">Choose your size:</div>
+                <div class="col-2">
+                    <input type="radio" name="Size" value="Small">Small
+                    <input type="radio" name="Size" value="Medium">Medium
+                    <input type="radio" name="Size" value="Large">Large
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1">Choose your colour:</div>
+                <div class="col-2">
+                    <select id="Color" name="Color">
+                        <option value="Red">Red</option>
+                        <option value="Purple">Purple</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Green">Green</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1">Extra Items:</div>
+                <div class="col-2">
+                    <input type="checkbox" name="Item_Cap" value="Cap" >Cap
+                    <br>
+                    <input type="checkbox" name="Item_WristBand" value="Wrist Band">Wrist Band
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-1" style="margin: 4% 0">Deliver To:</div>
+                    <div class="col-2">
+                        <div class="col-3">First Name:</div><div class="col-4"><input type="text" name="FirstName"></div>
+                        <div class="col-3">Last Name:</div><div class="col-4"><input type="text" name="LastName"></div>
+                        <div class="col-3">Address1:</div><div class="col-4"><input type="text" name="Adress1"></div>
+                        <div class="col-3">Address2:</div><div class="col-4"><input type="text" name="Adress2"></div>
+                        <div class="col-3">Address3:</div><div class="col-4"><input type="text" name="Adress3"></div>
+                    </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-1" style="margin: 6% 0">Your Comments:</div>
+                    <div class="col-2">             
+                        <textarea name="Comments" cols="50" rows="12"></textarea>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                <input type="submit" value="Order Now" style="margin-left:40%;">
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
