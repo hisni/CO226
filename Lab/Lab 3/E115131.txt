@@ -1,0 +1,45 @@
+mysql -u root -p
+create database E15131;
+use E15131;
+create table torder(
+   -> Order_Num int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   -> Size ENUM('S','M','L') NOT NULL,
+   -> Colour ENUM('R','P','B','G') NOT NULL,
+   -> Extra_items ENUM('C','W','C,W'),
+   -> F_Name VARCHAR(20) NOT NULL,
+   -> L_Name VARCHAR(20) NOT NULL,
+   -> Add_1 VARCHAR(50) NOT NULL,
+   -> Add_2 VARCHAR(50) NOT NULL,
+   -> Add_3 VARCHAR(50) NOT NULL,
+   -> Comments VARCHAR(200));
+show tables;
+describe torder;
+
+~output~
++-------------+----------------------------+------+-----+---------+----------------+
+| Field       | Type                       | Null | Key | Default | Extra          |
++-------------+----------------------------+------+-----+---------+----------------+
+| Order_Num   | int(11)                    | NO   | PRI | NULL    | auto_increment |
+| Size        | enum('S','M','L')          | YES  |     | NULL    |                |
+| Colour      | enum('R','P','B','G')      | YES  |     | NULL    |                |
+| Extra_items | enum('C','W','C,W','NULL') | YES  |     | NULL    |                |
+| F_Name      | varchar(20)                | NO   |     | NULL    |                |
+| L_Name      | varchar(20)                | NO   |     | NULL    |                |
+| Add_1       | varchar(50)                | NO   |     | NULL    |                |
+| Add_2       | varchar(50)                | NO   |     | NULL    |                |
+| Add_3       | varchar(50)                | NO   |     | NULL    |                |
+| Comments    | varchar(200)               | YES  |     | NULL    |                |
++-------------+----------------------------+------+-----+---------+----------------+
+10 rows in set (0.08 sec)
+
+~continue sql statements~
+insert into torder values
+    -> ('1','s','R','null','John','cameroon','126/b','peradeniya','kandy',null);
+insert into torder (size,colour,extra_items,f_name,l_name,add_1,add_2,add_3,comments) values
+	-> ('m','p','c,w','perera','kusal','398','ibbagamuwa','Kurunegala','send me asap');
+insert into torder (size,colour,extra_items,f_name,l_name,add_1,add_2,add_3,comments) values
+	-> ('m','g','w','mohan','singh','47','grandpass','Colombo','Thank you');
+update torder
+    -> set l_name='Jenith' where order_num= 2;
+delete from e14144lab03
+    -> where order_num = 2;

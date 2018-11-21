@@ -1,0 +1,41 @@
+CREATE DATABASE E15131;
+USE E15131;
+
+CREATE TABLE Tshirts ( tshirtID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ size enum('small','medium','large') NOT NULL,
+ color enum('Red','Purple','Blue','Green') NOT NULL);
+
+CREATE TABLE Customers ( customerID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ firstname varchar(20) NOT NULL,
+ lastname varchar(20) NOT NULL,
+ address1 varchar(50) NOT NULL,
+ address2 varchar(50) NOT NULL,
+ address3 varchar(50) NOT NULL );
+
+CREATE TABLE orders ( orderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ customerID INT NOT NULL,
+ tshirtID INT NOT NULL,
+ cap enum('Y','N'),
+ wristband enum('Y','N'),
+ comments TEXT,
+ CONSTRAINT customerID FOREIGN KEY (customerID) REFERENCES Customers(customerID),
+ CONSTRAINT tshirtID FOREIGN KEY (tshirtID) REFERENCES Tshirts(tshirtID) );
+
+INSERT INTO tshirts VALUES ( NULL, 'small', 'Red' );
+INSERT INTO tshirts VALUES ( NULL, 'medium', 'Purple');
+INSERT INTO tshirts VALUES ( NULL, 'large', 'Blue' );
+
+INSERT INTO customers VALUES ( NULL, 'Namal', 'Bandara', '15, China Street', 'Polgahawela', 'Kurunegala');
+INSERT INTO customers VALUES ( NULL, 'Kamal', 'Perera', '45/3, Church Lane', 'Maradane', 'Colombo 10');
+INSERT INTO customers VALUES ( NULL, 'John', 'Peter', '33, Main Street', 'Kalubowila', 'Colombo');
+
+INSERT INTO orders VALUES ( NULL, 1, 1, 'Y', 'N', 'Please deliver on time.' );
+INSERT INTO orders (orderID, customerID, tshirtID ) VALUES ( NULL, 3, 2 );
+INSERT INTO orders (orderID, customerID, tshirtID, wristband ) VALUES ( NULL, 2, 2, 'Y' );
+
+UPDATE customers SET firstname = 'Saman', lastname = 'Kumara' WHERE customerID = 2;
+UPDATE tshirts SET color = 'Green' WHERE tshirtID = 1;
+UPDATE orders SET cap = 'Y' WHERE orderID = 2;
+
+DELETE FROM orders WHERE orderID = 3;
+DELETE FROM tshirts WHERE tshirtID = 3;
