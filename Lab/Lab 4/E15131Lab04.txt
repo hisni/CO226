@@ -648,7 +648,7 @@ Lab Task02
 +------------------+
 
 19.
- SELECT* FROM REVIEWER WHERE ReviewerName like "%Martinez%";
+ SELECT* FROM REVIEWER WHERE SUBSTRING_INDEX( ReviewerName, ' ', -1) = 'Martinez';
 
 +------------+----------------+
 | ReviewerID | ReviewerName   |
