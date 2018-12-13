@@ -1,0 +1,168 @@
+1.
+(a) 
+ SELECT* FROM MOVIE WHERE Director IN ( SELECT ReviewerName FROM REVIEWER );
+
++---------+---------+------+---------------+
+| MovieID | Title   | Year | Director      |
++---------+---------+------+---------------+
+|     105 | Titanic | 1997 | James Cameron |
+|     107 | Avatar  | 2009 | James Cameron |
++---------+---------+------+---------------+
+
+(b)
+ SELECT* FROM MOVIE WHERE Director NOT IN ( SELECT ReviewerName FROM REVIEWER );
+
++---------+-------------------------+------+------------------+
+| MovieID | Title                   | Year | Director         |
++---------+-------------------------+------+------------------+
+|     101 | Gone with the Wind      | 1939 | Victor Fleming   |
+|     102 | Star Wars               | 1977 | George Lucas     |
+|     103 | The Sound of Music      | 1965 | Robert Wise      |
+|     104 | E.T.                    | 1982 | Steven Spielberg |
+|     108 | Raiders of the Lost Ark | 1981 | Steven Spielberg |
++---------+-------------------------+------+------------------+
+
+2.
+(a)
+SELECT* FROM RATING r WHERE r.ReviewerID IN (SELECT re.ReviewerID FROM REVIEWER re WHERE re.ReviewerName = "Sarah Martinez");
+
++----------+------------+---------+-------+------------+
+| RatingID | ReviewerID | MovieID | Stars | RatingDate |
++----------+------------+---------+-------+------------+
+|        1 |        201 |     101 | 2     | 2011-01-22 |
+|        2 |        201 |     101 | 4     | 2011-01-27 |
++----------+------------+---------+-------+------------+
+
+(b)
+ SELECT* FROM RATING r WHERE r.ReviewerID NOT IN (SELECT re.ReviewerID FROM REVIEWER re WHERE re.ReviewerName = "Sarah Martinez");
+
++----------+------------+---------+-------+------------+
+| RatingID | ReviewerID | MovieID | Stars | RatingDate |
++----------+------------+---------+-------+------------+
+|        3 |        202 |     106 | 4     | NULL       |
+|        4 |        203 |     103 | 3     | 2011-01-20 |
+|        5 |        203 |     108 | 5     | 2011-01-12 |
+|        6 |        203 |     108 | 3     | 2011-01-30 |
+|        7 |        204 |     101 | 3     | 2011-01-09 |
+|        8 |        205 |     103 | 3     | 2011-01-27 |
+|        9 |        205 |     104 | 2     | 2011-01-22 |
+|       10 |        205 |     108 | 4     | NULL       |
+|       11 |        206 |     107 | 3     | 2011-01-15 |
+|       12 |        206 |     106 | 5     | 2011-01-19 |
+|       13 |        207 |     107 | 5     | 2011-01-20 |
+|       14 |        208 |     104 | 3     | 2011-01-02 |
++----------+------------+---------+-------+------------+
+
+3.
+(a)
+ SELECT MovieID FROM RATING WHERE Stars < ANY (SELECT r.Stars FROM RATING r WHERE MovieID = "103");
+
++---------+
+| MovieID |
++---------+
+|     101 |
+|     103 |
+|     108 |
+|     104 |
++---------+
+
+(b)
+ SELECT MovieID FROM RATING WHERE Stars <= ANY (SELECT r.Stars FROM RATING r WHERE MovieID = "103");
+
++---------+
+| MovieID |
++---------+
+|     101 |
+|     103 |
+|     108 |
+|     101 |
+|     103 |
+|     104 |
+|     107 |
+|     104 |
++---------+
+
+(c)
+ SELECT MovieID FROM RATING WHERE Stars IN (SELECT r.Stars FROM RATING r WHERE MovieID = "103");
+
++---------+
+| MovieID |
++---------+
+|     101 |
+|     103 |
+|     108 |
+|     101 |
+|     103 |
+|     104 |
+|     107 |
+|     104 |
++---------+
+
+(d)
+ SELECT MovieID FROM RATING WHERE Stars > ANY (SELECT r.Stars FROM RATING r WHERE MovieID = "103");
+
++---------+
+| MovieID |
++---------+
+|     101 |
+|     106 |
+|     108 |
+|     101 |
+|     103 |
+|     108 |
+|     107 |
+|     106 |
+|     107 |
+|     104 |
++---------+
+
+(e)
+ SELECT MovieID FROM RATING WHERE Stars >= ANY (SELECT r.Stars FROM RATING r WHERE MovieID = "103");
+
++---------+
+| MovieID |
++---------+
+|     101 |
+|     101 |
+|     106 |
+|     103 |
+|     108 |
+|     108 |
+|     101 |
+|     103 |
+|     104 |
+|     108 |
+|     107 |
+|     106 |
+|     107 |
+|     104 |
++---------+
+
+(f)
+ SELECT MovieID FROM RATING WHERE Stars NOT IN (SELECT r.Stars FROM RATING r WHERE MovieID = "103");
+
++---------+
+| MovieID |
++---------+
+|     101 |
+|     106 |
+|     108 |
+|     108 |
+|     106 |
+|     107 |
++---------+
+
+4.
+ SELECT ReviewerID FROM Rating WHERE MovieID IN ( SELECT MovieID FROM RATING WHERE RatingDate = "2011-01-12") AND Stars IN ( SELECT Stars FROM RATING WHERE RatingDate = "2011-01-12");
+
++------------+
+| ReviewerID |
++------------+
+|        203 |
+|        205 |
++------------+
+
+5.
+ SELECT m.Year FROM MOVIE m, RATING r WHERE m.MovieID = r.MovieID AND (r.Stars = 4 OR r.Stars = 5);
+
+
